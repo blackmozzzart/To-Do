@@ -1,6 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import {ToDo} from './components/ToDo/ToDo'
 
 function App() {
   const [newToDo, setNewToDo] = React.useState('');
@@ -22,7 +22,7 @@ function App() {
         const key = toDo + '_' + index;
         console.log(key);
         return (
-          <li key={key}>{toDo}</li>
+          <ToDo ToDo={toDo}/>
         )
       })}</ul>
     </div>
