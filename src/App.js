@@ -7,6 +7,7 @@ function App() {
   const onHandleChange = (event) => {
     setNewToDo(event.target.value)};
   // console.log(newToDo);
+
   const [toDoList, setToDoList] = React.useState(['Что нибудь?', 'Вспомнил?'])
   const addToDo = (event) => {
     if (newToDo !== '') {
@@ -14,22 +15,30 @@ function App() {
       setNewToDo('')
     }
   }
-  const deleteToDo = (event) => {
-    console.log('deleteToDo')
-  }
+
+  const deleteToDo = (elementToDelete) => {
+    console.log('elementToDelete: ', elementToDelete);
+    console.log('Моя функция для удаления из родителя', toDoList)
+
+    const copyArray = [...toDoList].filter((item) => elementToDelete !== item);
+
+    setToDoList(copyArray);
+  };
+
   return (
     <div className="App">
       <input type='text' value={newToDo} onChange={onHandleChange}/>
       <button onClick={addToDo}>Подтвердить</button>
       <ul>{toDoList.map((toDo, index) => {
         const key = toDo + '_' + index;
-        // console.log(key);
+        
         return (
-          <ToDo text={toDo}/>
-        )
+          <ToDo key={key} text={toDo} color={'red'} deleteFunction={deleteToDo} />
+          )
       })}</ul>
     </div>
   );
 }
+
 
 export default App;
