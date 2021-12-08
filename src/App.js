@@ -1,20 +1,10 @@
 import './App.css';
 import React from 'react';
-import {ToDo} from './components/ToDo/ToDo'
+import { ToDo } from './components/ToDo/ToDo'
+import { TodoInput } from './components/TodoInput/TodoInput'
 
 function App() {
-  const [newToDo, setNewToDo] = React.useState('');
-  const onHandleChange = (event) => {
-    setNewToDo(event.target.value)};
-  // console.log(newToDo);
-
   const [toDoList, setToDoList] = React.useState(['Что нибудь?', 'Вспомнил?'])
-  const addToDo = (event) => {
-    if (newToDo !== '') {
-      setToDoList([newToDo, ...toDoList])
-      setNewToDo('')
-    }
-  }
 
   const deleteToDo = (elementToDelete) => {
     console.log('elementToDelete: ', elementToDelete);
@@ -27,14 +17,13 @@ function App() {
 
   return (
     <div className="App">
-      <input type='text' value={newToDo} onChange={onHandleChange}/>
-      <button onClick={addToDo}>Подтвердить</button>
+      <TodoInput updateTodoList={setToDoList} />
       <ul>{toDoList.map((toDo, index) => {
         const key = toDo + '_' + index;
-        
+
         return (
           <ToDo key={key} text={toDo} color={'red'} deleteFunction={deleteToDo} />
-          )
+        )
       })}</ul>
     </div>
   );
